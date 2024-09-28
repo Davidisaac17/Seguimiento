@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Seguimiento</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Dashboard de Seguimiento de Correos</h1>
+    <div id="data"></div>
+
+    <script>
+        function loadData() {
+            $.getJSON('https://script.google.com/macros/s/AKfycbxDRYbqiy_EfQf__C-1LoHphX8CwlvX2t6qRA86vJpZLP1XDd-hCnNj4A7dKcgp246mrg/exec', function(data) {
+                let html = '<table border="1"><tr><th>Nombre</th><th>Correo</th><th>Fecha</th><th>Etiqueta</th></tr>';
+                data.forEach(row => {
+                    html += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td></tr>`;
+                });
+                html += '</table>';
+                $('#data').html(html);
+            });
+        }
+
+        $(document).ready(function() {
+            loadData();
+        });
+    </script>
+</body>
+</html>
